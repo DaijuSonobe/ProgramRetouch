@@ -6,8 +6,8 @@ import java.sql.SQLException;
 
 public class MyDBManager {
 
-	final private static String URL = "jdbc:mysql://localhost/mysql/sampledb/";
-	final private static String DB_NAME = "sampleDB";
+	final private static String URL = "jdbc:mysql://localhost/";
+	final private static String DB_NAME = "sampledb";
 	final private static String USER = "root";
 	final private static String PASS = "password";
 

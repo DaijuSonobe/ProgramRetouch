@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html lang="ja">
   <head>
@@ -28,23 +28,25 @@
   <br>
     <div class="text-info" align="center"><h3>LOGIN MENU</h3></div>
   <br>
-    <form>
 
-    <div class="form-group"><div align="center"><h4>
-      <label for="InputLoginId">Login ID</label>
-      <input type="text" name="loginId" class="form-control w-25" id="InputLoginId" aria-describedby="emailHelp" placeholder="Enter Login ID "  required autofocus>
-    </h4></div></div>
+    <form class="form-signin" action="MyLoginServlet" method="post">
 
-    <div class="form-group"><div align="center"><h4>
-      <label for="InputPassword">Password</label>
-      <input type="password" name="password" class="form-control w-25" id="InputPassword" placeholder="Enter Password" required>
-    </h4></div></div>
+      <div class="form-group"><div align="center"><h4>
+        <label for="InputLoginId">Login ID</label>
+        <input type="text" name="loginId" class="form-control w-25" id="InputLoginId" placeholder="Enter Login ID " required autofocus>
+      </h4></div></div>
 
-    </form>
+      <div class="form-group"><div align="center"><h4>
+        <label for="InputPassword">Password</label>
+        <input type="password" name="password" class="form-control w-25" id="InputPassword" placeholder="Enter Password" required>
+      </h4></div></div>
 
   <br>
 
     <div align="center"><button class="btn btn-primary btn-signin" type="submit">Submit</button></div>
+
+    </form>
+
 
   </div>
 

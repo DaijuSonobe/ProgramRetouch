@@ -50,7 +50,7 @@ public class MyLoginServlet extends HttpServlet {
 
 		if(user == null) {
 
-			request.setAttribute("errMSG", "Failed Login attempt.");
+			request.setAttribute("errMsg", "Failed Login attempt.");
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
 			dispatcher.forward(request, response);
