@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,22 +9,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import dao.MyUserDao;
 import model.MyUser;
 
 /**
- * Servlet implementation class MyLoginServlet
+ * Servlet implementation class MyUserListServlet
  */
-@WebServlet("/MyLoginServlet")
-public class MyLoginServlet extends HttpServlet {
+@WebServlet("/MyUserListServlet")
+public class MyUserListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyLoginServlet() {
+    public MyUserListServlet() {
         super();
     }
 
@@ -32,7 +32,12 @@ public class MyLoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
+		MyUserDao myUserDao = new MyUserDao();
+		List<MyUser> userList = myUserDao.findAll();;
+
+		request.setAttribute("userList", userList);
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/userList.jsp");
 		dispatcher.forward(request, response);
 
 	}
@@ -41,27 +46,6 @@ public class MyLoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		String loginId = request.getParameter("loginId");
-		String password = request.getParameter("password");
-
-		MyUserDao myUserDao = new MyUserDao();
-		MyUser user = myUserDao.findByLoginInfo(loginId, password);
-
-		if(user == null) {
-
-			request.setAttribute("errMSG", "Failed Login attempt.");
-
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
-			dispatcher.forward(request, response);
-
-			return;
-		}
-
-		HttpSession session = request.getSession();
-		session.setAttribute("userInfo", user);
-
-		response.sendRedirect("MyUserListServlet");
 
 	}
 

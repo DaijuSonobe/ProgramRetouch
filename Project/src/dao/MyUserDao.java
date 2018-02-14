@@ -14,7 +14,9 @@ import model.MyUser;
 public class MyUserDao {
 
 	public MyUser findByLoginInfo(String loginId, String password) {
+
 		Connection conn = null;
+
 		try {
 
 			conn = MyDBManager.getConnection();
@@ -33,7 +35,7 @@ public class MyUserDao {
 			String loginIdData = rs.getString("login_id");
 			String nameData = rs.getString("name");
 
-			retrun new MyUser(loginIdData, nameData);
+			return new MyUser(loginIdData, nameData);
 
 		}catch(SQLException e){
 

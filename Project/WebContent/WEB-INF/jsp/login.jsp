@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!doctype html>
 <html lang="ja">
@@ -14,6 +13,12 @@
   </head>
   <body>
 
+  <c:if test="${errMsg != null}" >
+	    <div class="alert alert-danger" role="alert">
+		  ${errMsg}
+		</div>
+  </c:if>
+
  <div class="container">
 
  	<div class="header p-3 mb-2 bg-success text-black">
@@ -26,20 +31,20 @@
     <form>
 
     <div class="form-group"><div align="center"><h4>
-      <label for="exampleInputEmail1">Login ID</label>
-      <input type="email" class="form-control w-25" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Login ID ">
+      <label for="InputLoginId">Login ID</label>
+      <input type="text" name="loginId" class="form-control w-25" id="InputLoginId" aria-describedby="emailHelp" placeholder="Enter Login ID "  required autofocus>
     </h4></div></div>
 
     <div class="form-group"><div align="center"><h4>
-      <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control w-25" id="exampleInputPassword1" placeholder="Enter Password">
+      <label for="InputPassword">Password</label>
+      <input type="password" name="password" class="form-control w-25" id="InputPassword" placeholder="Enter Password" required>
     </h4></div></div>
 
     </form>
 
   <br>
 
-    <div align="center"><a href="userList.html" type="submit" class="btn btn-primary">Submit</a></div>
+    <div align="center"><button class="btn btn-primary btn-signin" type="submit">Submit</button></div>
 
   </div>
 
