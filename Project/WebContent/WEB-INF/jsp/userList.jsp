@@ -83,8 +83,8 @@
         <td>${user.birthDate}</td>
         <td>
           <a href="MyUserDetailServlet?id=${user.id}" type="submit" class="btn btn-primary btn-sm">Detail</a><span style="margin-right: 1em;"></span>
-          <a href="MyUserDetailServlet?id=${user.id}" type="submit" class="btn btn-primary btn-sm">Update</a><span style="margin-right: 1em;"></span>
-          <a href="MyUserDetailServlet?id=${user.id}" type="submit" class="btn btn-primary btn-sm">Delete</a>
+          <a href="MyUserUpdateServlet?id=${user.id}" type="submit" class="btn btn-primary btn-sm">Update</a><span style="margin-right: 1em;"></span>
+          <a href="MyUserDeleteServlet?id=${user.id}" type="submit" class="btn btn-primary btn-sm">Delete</a>
         </td>
         </tr>
       </c:forEach>

@@ -22,8 +22,8 @@
 
 
     <div class="header text-info">
-      <div align="right">Hi! ユーザ名さん<span style="margin-right: 1em;"></span>
-      <a href="login.html" type="button" class="btn btn-secondary btn-sm">Logout</a>
+      <div align="right">Hi! ${userInfo.name}<span style="margin-right: 1em;"></span>
+      <a href="MyLogoutServlet" type="button" class="btn btn-secondary btn-sm">Logout</a>
       </div>
     </div>
 
@@ -43,23 +43,23 @@
   <tbody>
     <tr>
       <th scope="row">Login ID</th>
-      <td>a</td>
+      <td>${user.loginId}</td>
     </tr>
     <tr>
       <th scope="row">User Name</th>
-      <td>b</td>
+      <td>${user.name}</td>
     </tr>
     <tr>
       <th scope="row">Birth Date</th>
-      <td>c</td>
+      <td>${user.birthDate}</td>
     </tr>
      <tr>
       <th scope="row">Registration Date</th>
-      <td>d</td>
+      <td>${user.createDate}</td>
     </tr>
      <tr>
       <th scope="row">Update Time</th>
-      <td>e</td>
+      <td>${user.updateDate}</td>
     </tr>
   </tbody>
 </table>
@@ -71,7 +71,7 @@
 
   <br><br>
 
-    <div align="right"><a href="userList.html" class="badge badge-light">Go Back</a></div>
+    <div align="right"><a href="MyUserListServlet" class="badge badge-light">Go Back</a></div>
 
   </div>
 

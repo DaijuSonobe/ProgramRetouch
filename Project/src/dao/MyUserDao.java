@@ -113,7 +113,7 @@ public class MyUserDao {
 
 	}
 
-	public MyUser findByLoginInfo(String loginId) {
+	public MyUser findByLoginInfo(String id) {
 
 		Connection conn = null;
 
@@ -121,23 +121,23 @@ public class MyUserDao {
 
 			conn = MyDBManager.getConnection();
 
-			String sql = "SELECT * FROM user WHERE login_id = ?";
+			String sql = "SELECT * FROM user WHERE id = ?";
 
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setString(1, loginId);
+			pStmt.setString(1, id);
 			ResultSet rs = pStmt.executeQuery();
 
 			if(!rs.next()) {
 				return null;
 			}
 
-			String loginIdData = rs.getString("login_id");
-			String nameData = rs.getString("name");
-			Date birthDateData = rs.getDate("birth_date");
-			String createDateData = rs.getString("create_date");
-			String updateDateData = rs.getString("update_date");
+			String loginId = rs.getString("login_id");
+			String name = rs.getString("name");
+			Date birthDate = rs.getDate("birth_date");
+			String createDate = rs.getString("create_date");
+			String updateDate = rs.getString("update_date");
 
-			return new MyUser(loginIdData, nameData, birthDateData, createDateData, updateDateData);
+			return new MyUser(loginId, name, birthDate, createDate, updateDate);
 
 		}catch(SQLException e){
 
@@ -159,6 +159,7 @@ public class MyUserDao {
 				}
 			}
 		}
+
 	}
 
 }
