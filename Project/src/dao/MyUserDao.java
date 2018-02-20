@@ -134,10 +134,11 @@ public class MyUserDao {
 			String loginId = rs.getString("login_id");
 			String name = rs.getString("name");
 			Date birthDate = rs.getDate("birth_date");
+			String password = rs.getString("password");
 			String createDate = rs.getString("create_date");
 			String updateDate = rs.getString("update_date");
 
-			return new MyUser(loginId, name, birthDate, createDate, updateDate);
+			return new MyUser(loginId, name, birthDate, password, createDate, updateDate);
 
 		}catch(SQLException e){
 
@@ -162,5 +163,45 @@ public class MyUserDao {
 
 	}
 
-}
+	public void updateUserInfo(String id, String loginId, String password, String name, Date birthDate, String updateDate) {
 
+		Connection conn = null;
+
+		try {
+
+			conn = MyDBManager.getConnection();
+
+			String sql = "UPDATE user SET login_id= 'loginId' name = 'name' birth_date = 'birthDate' password = 'password' updateDate = 'updateDate' WHERE id = ?";
+
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, id);
+			ResultSet rs = pStmt.executeQuery();
+
+			if(!rs.next()) {
+				return;
+			}
+
+		}catch(SQLException e){
+
+			e.printStackTrace();
+			return;
+
+		}finally {
+
+			if(conn != null) {
+
+				try {
+
+					conn.close();
+
+				}catch(SQLException e) {
+
+					e.printStackTrace();
+					return;
+				}
+			}
+		}
+
+	}
+
+}

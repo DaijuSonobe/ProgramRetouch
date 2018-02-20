@@ -1,5 +1,5 @@
-<%@page import="sun.security.util.Password"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!doctype html>
 <html lang="ja">
@@ -9,16 +9,10 @@
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
 
-    <title>REGISTRATION SCREEN</title>
+    <title>UPDATE USER INFO</title>
 
   </head>
   <body>
-
-  <c:if test="${errMsg != null}" >
-	    <div class="alert alert-danger" role="alert">
-		  ${errMsg}
-		</div>
-  </c:if>
 
   <div class="container">
 
@@ -29,56 +23,57 @@
 
     <div class="header text-info">
       <div align="right">Hi! ${userInfo.name}<span style="margin-right: 1em;"></span>
-      <a href="MyLogoutServlet" type="button" class="btn btn-secondary btn-sm">Logout</a>
+      <a href="login.html" type="button" class="btn btn-secondary btn-sm">Logout</a>
       </div>
     </div>
 
   <br>
-    <div class="text-info" align="center"><h3>NEW USER</h3></div>
+    <div class="text-info" align="center"><h3>UPDATE USER INFO</h3></div>
   <br>
 
-    <form class="form" action="MyUserRegisterServlet" method="post">
+    <form class="form" action="MyUserUpdateServlet" method="post">
 
     <div class="form-group"><div align="center">
-      <font size="+2">Login ID</font><span style="margin-right: 2em;"></span>:<span style="margin-right: 2em;"></span>
-      <input type="text" class="form w-25" name="id" id="Id" autofocus placeholder="Enter Login ID ">
+      <font size="+2">Login ID<span style="margin-right: 0.5em;"></span>/<span style="margin-right: 0.5em;"></span>${user.loginId}</font>
     </div></div>
 
     <br>
 
     <div class="form-group"><div align="center">
       <font size="+2">Password</font><span style="margin-right: 2em;"></span>:<span style="margin-right: 2em;"></span>
-      <input type="password" class="form w-25" name="password1" id="Password1" placeholder="Enter Password">
+      <input type="password" class="form w-25" id="InputPassword1" name="password1" autofocus placeholder="Enter Password">
     </div></div>
 
     <br>
 
     <div class="form-group"><div align="center">
       <font size="+2">Password(again)</font><span style="margin-right: 2em;"></span>:<span style="margin-right: 2em;"></span>
-      <input type="password" class="form w-25" name="password2" id="Password2" placeholder="Enter the same Password">
+      <input type="password" class="form w-25" id="InputPassword2" name="password2" placeholder="Enter the same Password">
     </div></div>
 
     <br>
 
     <div class="form-group"><div align="center">
       <font size="+2">User Name</font><span style="margin-right: 2em;"></span>:<span style="margin-right: 2em;"></span>
-      <input type="text" class="form w-25" name="userNm" id="UserNm" placeholder="Enter User Name">
+      <input type="text" class="form w-25" id="InputUserNm" name="name" value="${user.name}">
     </div></div>
 
     <br>
 
     <div class="form-group"><div align="center">
       <font size="+2">Birth Date</font><span style="margin-right: 2em;"></span>:<span style="margin-right: 2em;"></span>
-      <input type="text" class="form w-25" name="birthDate" id="BirthDate" placeholder="Enter Birth Date (sample: 2000-01-01)">
+      <input type="datetime" class="form w-25" id="InputBD" name="birthDate" value="${user.birthDate}">
     </div></div>
 
+    <input type="hidden"  name="updateDate" value="<%= System.currentTimeMillis() %>">
+
   <br><br>
 
-    <div align="center"><button type="submit" class="btn btn-primary">Register</button></div>
+    <div align="center"><button type="submit" class="btn btn-primary">Update</button></div>
+
+  <br><br>
 
     </form>
-
-  <br><br>
 
     <div align="right"><a href="MyUserListServlet" class="badge badge-light">Go Back</a></div>
 

@@ -22,7 +22,7 @@
 
     <div class="header text-info">
       <div align="right">Hi! ${userInfo.name}<span style="margin-right: 1em;"></span>
-      <a href=""MyLogoutServlet"" type="button" class="btn btn-secondary btn-sm">Logout</a>
+      <a href="MyLogoutServlet" type="button" class="btn btn-secondary btn-sm">Logout</a>
       </div>
     </div>
 
@@ -62,7 +62,7 @@
 
 <br><br>
 
-    <a href="registerUser.html" type="button" class="btn btn-outline-info">Add User</a>
+    <a href="MyUserRegisterServlet" type="button" class="btn btn-outline-info">Add User</a>
 
 <br><br><br>
 

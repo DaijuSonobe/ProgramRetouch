@@ -17,7 +17,7 @@ public class MyUser {
 		this.name = name;
 	}
 
-	public MyUser(String loginId, String name, Date birthDate, String createDate, String updateDate) {
+	public MyUser(String loginId, String name, Date birthDate, String password, String createDate, String updateDate) {
 
 		this.loginId = loginId;
 		this.name = name;

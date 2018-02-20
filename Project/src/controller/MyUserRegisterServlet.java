@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,16 +11,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class MyRegisterUserServlet
+ * Servlet implementation class MyUserRegisterServlet
  */
-@WebServlet("/MyRegisterUserServlet")
-public class MyRegisterUserServlet extends HttpServlet {
+@WebServlet("/MyUserRegisterServlet")
+public class MyUserRegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyRegisterUserServlet() {
+    public MyUserRegisterServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,6 +39,13 @@ public class MyRegisterUserServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		String loginId = request.getParameter("loginId");
+		String password = request.getParameter("password");
+		String userNm = request.getParameter("userNm");
+		Date birthDate = request.getParameter("birthDate");
+
+
 
 	}
 
