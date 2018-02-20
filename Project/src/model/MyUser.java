@@ -17,6 +17,16 @@ public class MyUser {
 		this.name = name;
 	}
 
+	public MyUser(String loginId, String name, Date birthDate, String createDate, String updateDate) {
+
+		this.loginId = loginId;
+		this.name = name;
+		this.birthDate = birthDate;
+		this.createDate = createDate;
+		this.updateDate = updateDate;
+
+	}
+
 	public MyUser(int id, String loginId, String name, Date birthDate, String password, String createDate, String updateDate) {
 		this.id = id;
 		this.loginId = loginId;

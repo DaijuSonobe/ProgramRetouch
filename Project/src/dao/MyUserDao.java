@@ -113,4 +113,53 @@ public class MyUserDao {
 
 	}
 
+	public MyUser findByLoginInfo(String loginId) {
+
+		Connection conn = null;
+
+		try {
+
+			conn = MyDBManager.getConnection();
+
+			String sql = "SELECT * FROM user WHERE login_id = ?";
+
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, loginId);
+			ResultSet rs = pStmt.executeQuery();
+
+			if(!rs.next()) {
+				return null;
+			}
+
+			String loginIdData = rs.getString("login_id");
+			String nameData = rs.getString("name");
+			Date birthDateData = rs.getDate("birth_date");
+			String createDateData = rs.getString("create_date");
+			String updateDateData = rs.getString("update_date");
+
+			return new MyUser(loginIdData, nameData, birthDateData, createDateData, updateDateData);
+
+		}catch(SQLException e){
+
+			e.printStackTrace();
+			return null;
+
+		}finally {
+
+			if(conn != null) {
+
+				try {
+
+					conn.close();
+
+				}catch(SQLException e) {
+
+					e.printStackTrace();
+					return null;
+				}
+			}
+		}
+	}
+
 }
+

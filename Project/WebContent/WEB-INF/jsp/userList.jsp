@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!doctype html>
 <html lang="ja">
@@ -75,27 +76,20 @@
       </tr>
     </thead>
     <tbody>
+      <c:forEach var="user" items="${userList}" >
       <tr>
-        <th scope="row">0001</th>
-        <td>a</td>
-        <td>b</td>
-        <td><a href="userInfo.html" type="submit" class="btn btn-primary btn-sm">Detail</a><span style="margin-right: 1em;"></span><a href="updateUser.html" type="submit" class="btn btn-primary btn-sm">Update</a><span style="margin-right: 1em;"></span><a href="deleteUser.html" type="submit" class="btn btn-primary btn-sm">Delete</a></td>
-      </tr>
-      <tr>
-        <th scope="row">0002</th>
-        <td>aa</td>
-        <td>bb</td>
-        <td><a href="userInfo.html" type="submit" class="btn btn-primary btn-sm">Detail</a><span style="margin-right: 1em;"></span><a href="updateUser.html" type="submit" class="btn btn-primary btn-sm">Update</a><span style="margin-right: 1em;"></span><a href="deleteUser.html" type="submit" class="btn btn-primary btn-sm">Delete</a></td>
-      </tr>
-      <tr>
-        <th scope="row">0003</th>
-        <td>aaa</td>
-        <td>bbb</td>
-        <td><a href="userInfo.html" type="submit" class="btn btn-primary btn-sm">Detail</a><span style="margin-right: 1em;"></span><a href="updateUser.html" type="submit" class="btn btn-primary btn-sm">Update</a><span style="margin-right: 1em;"></span><a href="deleteUser.html" type="submit" class="btn btn-primary btn-sm">Delete</a></td>
-      </tr>
+        <td>${user.loginId}</td>
+        <td>${user.name}</td>
+        <td>${user.birthDate}</td>
+        <td>
+          <a href="MyUserDetailServlet?id=${user.id}" type="submit" class="btn btn-primary btn-sm">Detail</a><span style="margin-right: 1em;"></span>
+          <a href="MyUserDetailServlet?id=${user.id}" type="submit" class="btn btn-primary btn-sm">Update</a><span style="margin-right: 1em;"></span>
+          <a href="MyUserDetailServlet?id=${user.id}" type="submit" class="btn btn-primary btn-sm">Delete</a>
+        </td>
+        </tr>
+      </c:forEach>
     </tbody>
     </table>
-
 </div>
 </body>
 </html>
