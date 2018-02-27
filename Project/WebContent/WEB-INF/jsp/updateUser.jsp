@@ -23,7 +23,7 @@
 
     <div class="header text-info">
       <div align="right">Hi! ${userInfo.name}<span style="margin-right: 1em;"></span>
-      <a href="login.html" type="button" class="btn btn-secondary btn-sm">Logout</a>
+      <a href="MyLogoutServlet" type="button" class="btn btn-secondary btn-sm">Logout</a>
       </div>
     </div>
 
@@ -41,7 +41,7 @@
 
     <div class="form-group"><div align="center">
       <font size="+2">Password</font><span style="margin-right: 2em;"></span>:<span style="margin-right: 2em;"></span>
-      <input type="password" class="form w-25" id="InputPassword1" name="password1" autofocus placeholder="Enter Password">
+      <input type="password" class="form w-25" id="InputPassword1" name="password" autofocus placeholder="Enter Password">
     </div></div>
 
     <br>
@@ -64,6 +64,8 @@
       <font size="+2">Birth Date</font><span style="margin-right: 2em;"></span>:<span style="margin-right: 2em;"></span>
       <input type="datetime" class="form w-25" id="InputBD" name="birthDate" value="${user.birthDate}">
     </div></div>
+
+    <input type="hidden"  name="id" value="${user.id}">
 
     <input type="hidden"  name="updateDate" value="<%= System.currentTimeMillis() %>">
 

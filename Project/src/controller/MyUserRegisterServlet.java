@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.sql.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import dao.MyUserDao;
+import model.MyUser;
 
 /**
  * Servlet implementation class MyUserRegisterServlet
@@ -30,6 +33,16 @@ public class MyUserRegisterServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		HttpSession session = request.getSession();
+		MyUser user = (MyUser)session.getAttribute("userInfo");
+
+		if(user == null) {
+
+			response.sendRedirect("MyLoginServlet");
+
+			return;
+		}
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registerUser.jsp");
 		dispatcher.forward(request, response);
 
@@ -42,10 +55,15 @@ public class MyUserRegisterServlet extends HttpServlet {
 
 		String loginId = request.getParameter("loginId");
 		String password = request.getParameter("password");
-		String userNm = request.getParameter("userNm");
-		Date birthDate = request.getParameter("birthDate");
+		String name = request.getParameter("userNm");
+		String birthDate = request.getParameter("birthDate");
+		String createDate = request.getParameter("createDate");
+		String updateDate = request.getParameter("createDate");
 
+		MyUserDao myUserDao = new MyUserDao();
+		myUserDao.registerUser(loginId, password, name, birthDate, createDate, updateDate);
 
+		response.sendRedirect("MyUserListServlet");
 
 	}
 

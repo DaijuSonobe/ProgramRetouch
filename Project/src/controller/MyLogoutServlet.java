@@ -1,9 +1,7 @@
 package controller;
 
 import java.io.IOException;
-import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,21 +9,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.MyUserDao;
-import model.MyUser;
-
 /**
- * Servlet implementation class MyUserListServlet
+ * Servlet implementation class MyLogoutServlet
  */
-@WebServlet("/MyUserListServlet")
-public class MyUserListServlet extends HttpServlet {
+@WebServlet("/MyLogoutServlet")
+public class MyLogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyUserListServlet() {
+    public MyLogoutServlet() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -34,22 +30,9 @@ public class MyUserListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-		MyUser user = (MyUser)session.getAttribute("userInfo");
+		session.removeAttribute("userInfo");
 
-		if(user == null) {
-
-			response.sendRedirect("MyLoginServlet");
-
-			return;
-		}
-
-		MyUserDao myUserDao = new MyUserDao();
-		List<MyUser> userList = myUserDao.findAll();;
-
-		request.setAttribute("userList", userList);
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/userList.jsp");
-		dispatcher.forward(request, response);
+		response.sendRedirect("MyLoginServlet");
 
 	}
 
@@ -57,7 +40,8 @@ public class MyUserListServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }

@@ -131,6 +131,7 @@ public class MyUserDao {
 				return null;
 			}
 
+			int idData = rs.getInt("id");
 			String loginId = rs.getString("login_id");
 			String name = rs.getString("name");
 			Date birthDate = rs.getDate("birth_date");
@@ -138,7 +139,7 @@ public class MyUserDao {
 			String createDate = rs.getString("create_date");
 			String updateDate = rs.getString("update_date");
 
-			return new MyUser(loginId, name, birthDate, password, createDate, updateDate);
+			return new MyUser(idData, loginId, name, birthDate, password, createDate, updateDate);
 
 		}catch(SQLException e){
 
@@ -163,7 +164,8 @@ public class MyUserDao {
 
 	}
 
-	public void updateUserInfo(String id, String loginId, String password, String name, Date birthDate, String updateDate) {
+
+	public void registerUser(String loginId, String name, String birthDate, String password, String createDate, String updateDate) {
 
 		Connection conn = null;
 
@@ -171,15 +173,105 @@ public class MyUserDao {
 
 			conn = MyDBManager.getConnection();
 
-			String sql = "UPDATE user SET login_id= 'loginId' name = 'name' birth_date = 'birthDate' password = 'password' updateDate = 'updateDate' WHERE id = ?";
+			String sql = "INSERT INTO user (login_id, name, birth_date, password, createDate, updateDate) VALUE(?, ?, ?, ?, ?, ?)";
+
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, loginId);
+			pStmt.setString(2, name);
+			pStmt.setString(3, birthDate);
+			pStmt.setString(4, password);
+			pStmt.setString(5, createDate);
+			pStmt.setString(6, updateDate);
+
+			int rs = pStmt.executeUpdate(sql);
+			System.out.println(rs);
+
+			pStmt.close();
+
+		}catch(SQLException e){
+
+			e.printStackTrace();
+			return;
+
+		}finally {
+
+			if(conn != null) {
+
+				try {
+
+					conn.close();
+
+				}catch(SQLException e) {
+
+					e.printStackTrace();
+					return;
+				}
+			}
+		}
+
+	}
+
+
+	public void updateUserInfo(String id, String password, String name, String birthDate, String updateDate) {
+
+		Connection conn = null;
+
+		try {
+
+			conn = MyDBManager.getConnection();
+
+			String sql = "UPDATE user SET name = ?, birth_date = ?, password = ?, update_date = ? WHERE id = ?";
+
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, name);
+			pStmt.setString(2, birthDate);
+			pStmt.setString(3, password);
+			pStmt.setString(4, updateDate);
+			pStmt.setString(5, id);
+
+			int rs = pStmt.executeUpdate(sql);
+			System.out.println(rs);
+
+			pStmt.close();
+
+		}catch(SQLException e){
+
+			e.printStackTrace();
+			return;
+
+		}finally {
+
+			if(conn != null) {
+
+				try {
+
+					conn.close();
+
+				}catch(SQLException e) {
+
+					e.printStackTrace();
+					return;
+				}
+			}
+		}
+
+	}
+
+	public void deleteUserInfo(String id) {
+
+		Connection conn = null;
+
+		try {
+
+			conn = MyDBManager.getConnection();
+
+			String sql = "DELETE FROM user WHERE id = ?";
 
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, id);
-			ResultSet rs = pStmt.executeQuery();
+			int rs = pStmt.executeUpdate();
 
-			if(!rs.next()) {
-				return;
-			}
+			return;
 
 		}catch(SQLException e){
 

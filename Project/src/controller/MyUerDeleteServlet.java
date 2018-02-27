@@ -2,7 +2,6 @@ package controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,17 +13,18 @@ import dao.MyUserDao;
 import model.MyUser;
 
 /**
- * Servlet implementation class MyLoginServlet
+ * Servlet implementation class MyUerDeleteServlet
  */
-@WebServlet("/MyLoginServlet")
-public class MyLoginServlet extends HttpServlet {
+@WebServlet("/MyUerDeleteServlet")
+public class MyUerDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyLoginServlet() {
+    public MyUerDeleteServlet() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -35,16 +35,21 @@ public class MyLoginServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		MyUser user = (MyUser)session.getAttribute("userInfo");
 
-		if(user != null) {
+		if(user == null) {
 
-			response.sendRedirect("MyUserListServlet");
+			response.sendRedirect("MyLoginServlet");
 
 			return;
 		}
 
+		String id = request.getParameter("id");
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
-		dispatcher.forward(request, response);
+		System.out.println(id);
+
+		MyUserDao myUserDao = new MyUserDao();
+		myUserDao.deleteUserInfo(id);
+
+		response.sendRedirect("MyUserListServlet");
 
 	}
 
@@ -52,28 +57,8 @@ public class MyLoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		String loginId = request.getParameter("loginId");
-		String password = request.getParameter("password");
-
-		MyUserDao myUserDao = new MyUserDao();
-		MyUser user = myUserDao.findByLoginInfo(loginId, password);
-
-		if(user == null) {
-
-			request.setAttribute("errMsg", "Failed Login attempt.");
-
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
-			dispatcher.forward(request, response);
-
-			return;
-		}
-
-		HttpSession session = request.getSession();
-		session.setAttribute("userInfo", user);
-
-		response.sendRedirect("MyUserListServlet");
-
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }

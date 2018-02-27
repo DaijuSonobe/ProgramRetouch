@@ -14,12 +14,6 @@
   </head>
   <body>
 
-  <c:if test="${errMsg != null}" >
-	    <div class="alert alert-danger" role="alert">
-		  ${errMsg}
-		</div>
-  </c:if>
-
   <div class="container">
 
  	<div class="header p-3 mb-2 bg-success text-black">
@@ -71,6 +65,9 @@
       <font size="+2">Birth Date</font><span style="margin-right: 2em;"></span>:<span style="margin-right: 2em;"></span>
       <input type="text" class="form w-25" name="birthDate" id="BirthDate" placeholder="Enter Birth Date (sample: 2000-01-01)">
     </div></div>
+
+    <input type="hidden"  name="createDate" value="<%= System.currentTimeMillis() %>">
+    <input type="hidden"  name="updateDate" value="<%= System.currentTimeMillis() %>">
 
   <br><br>
 

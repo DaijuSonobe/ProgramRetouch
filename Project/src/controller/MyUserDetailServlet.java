@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.MyUserDao;
 import model.MyUser;
@@ -32,14 +33,24 @@ public class MyUserDetailServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		HttpSession session = request.getSession();
+		MyUser user = (MyUser)session.getAttribute("userInfo");
+
+		if(user == null) {
+
+			response.sendRedirect("MyLoginServlet");
+
+			return;
+		}
+
 		String id = request.getParameter("id");
 
 		System.out.println(id);
 
 		MyUserDao myUserDao = new MyUserDao();
-		MyUser user = myUserDao.findByLoginInfo(id);
+		MyUser MyUser = myUserDao.findByLoginInfo(id);
 
-		request.setAttribute("user", user);
+		request.setAttribute("user", MyUser);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/userInfo.jsp");
 		dispatcher.forward(request, response);
