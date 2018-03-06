@@ -30,16 +30,16 @@
     <div class="text-info" align="center"><h3>USER LIST</h3></div>
   <br>
 
-    <form>
+    <form class="form" action="MyUserListServlet" method="post">
 
     <div class="form-group"><h4>
       <label for="exampleInputEmail1">Login ID</label>
-      <input type="email" class="form-control w-25" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Login ID">
+      <input type="text" class="form-control w-25" name="loginId" placeholder="Enter FULL Login ID" autofocus>
     </h4></div>
 
     <div class="form-group"><h4>
       <label for="exampleInputPassword1">User Name</label>
-      <input type="password" class="form-control w-25" id="exampleInputPassword1" placeholder="User Name">
+      <input type="text" class="form-control w-25" name="name" placeholder="User Name">
     </h4></div>
 
     <div class="form-group"><h4>
@@ -47,24 +47,27 @@
 
       <br>
 
-      <input type="date" name="date" value="">
+      <input type="date" name="date1" value="">
 
       ～
 
-      <input type="date" name="date" value="">
+      <input type="date" name="date2" value="">
     </h4></div>
-
-    </form>
 
 <br>
 
     <button type="submit" class="btn btn-primary">Search</button>
+
+     </form>
+
 
 <br><br>
 
     <a href="MyUserRegisterServlet" type="button" class="btn btn-outline-info">Add User</a>
 
 <br><br><br>
+
+
 
     <table class="table table-sm">
     <thead>
@@ -82,14 +85,26 @@
         <td>${user.name}</td>
         <td>${user.birthDate}</td>
         <td>
+          <c:if test="${userInfo.loginId == 'admin'}" >
           <a href="MyUserDetailServlet?id=${user.id}" type="submit" class="btn btn-primary btn-sm">Detail</a><span style="margin-right: 1em;"></span>
           <a href="MyUserUpdateServlet?id=${user.id}" type="submit" class="btn btn-primary btn-sm">Update</a><span style="margin-right: 1em;"></span>
           <a href="MyUserDeleteServlet?id=${user.id}" type="submit" class="btn btn-primary btn-sm">Delete</a>
+          </c:if>
+          <c:if test="${userInfo.loginId != 'admin'}" >
+          <a href="MyUserDetailServlet?id=${user.id}" type="submit" class="btn btn-primary btn-sm">Detail</a><span style="margin-right: 1em;"></span>
+          <c:if test="${userInfo.loginId == user.loginId}" >
+          <a href="MyUserUpdateServlet?id=${user.id}" type="submit" class="btn btn-primary btn-sm">Update</a><span style="margin-right: 1em;"></span>
+          </c:if>
+
+          </c:if>
         </td>
         </tr>
       </c:forEach>
     </tbody>
     </table>
+
+
+
 </div>
 </body>
 </html>

@@ -53,15 +53,40 @@ public class MyUserRegisterServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		request.setCharacterEncoding("UTF-8");
+
 		String loginId = request.getParameter("loginId");
-		String password = request.getParameter("password");
+		String password1 = request.getParameter("password1");
+		String password2 = request.getParameter("password2");
 		String name = request.getParameter("userNm");
 		String birthDate = request.getParameter("birthDate");
-		String createDate = request.getParameter("createDate");
-		String updateDate = request.getParameter("createDate");
 
 		MyUserDao myUserDao = new MyUserDao();
-		myUserDao.registerUser(loginId, password, name, birthDate, createDate, updateDate);
+
+		boolean x = myUserDao.findByLoginIdInfo(loginId);
+
+		if(x == true) {
+
+			request.setAttribute("errMsg", "Registration Failed.");
+
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registerUser.jsp");
+			dispatcher.forward(request, response);
+
+			return;
+
+		}else if(!password1.equals(password2) || password1.equals("") || password2.equals("") || name.equals("") || birthDate.equals("")) {
+
+			request.setAttribute("errMsg", "Registration Failed.");
+
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registerUser.jsp");
+			dispatcher.forward(request, response);
+
+			return;
+
+		}
+
+
+		myUserDao.registerUser(loginId, name, birthDate, password1);
 
 		response.sendRedirect("MyUserListServlet");
 

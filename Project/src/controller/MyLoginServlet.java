@@ -53,6 +53,8 @@ public class MyLoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		request.setCharacterEncoding("UTF-8");
+
 		String loginId = request.getParameter("loginId");
 		String password = request.getParameter("password");
 

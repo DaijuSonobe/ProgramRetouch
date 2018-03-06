@@ -63,14 +63,55 @@ public class MyUserUpdateServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		request.setCharacterEncoding("UTF-8");
+
 		String id = request.getParameter("id");
-		String password = request.getParameter("password");
+		String password1 = request.getParameter("password1");
+		String password2 = request.getParameter("password2");
+		String password3 = request.getParameter("password3");
 		String name = request.getParameter("name");
 		String birthDate = request.getParameter("birthDate");
-		String updateDate = request.getParameter("updateDate");
+
+		if(password1.equals("") && password2.equals("") && !name.equals("") && !birthDate.equals("")) {
+
+			MyUserDao myUserDao = new MyUserDao();
+			myUserDao.updateUserInfo(id, password3, name, birthDate);
+
+			response.sendRedirect("MyUserListServlet");
+
+			return;
+
+		}else if(!password1.equals("") && password2.equals("") && !name.equals("") && !birthDate.equals("")) {
+
+			MyUserDao myUserDao = new MyUserDao();
+			myUserDao.updateUserInfo(id, password1, name, birthDate);
+
+			response.sendRedirect("MyUserListServlet");
+
+			return;
+
+		}else if(password1.equals("") && !password2.equals("") && !name.equals("") && !birthDate.equals("")) {
+
+			MyUserDao myUserDao = new MyUserDao();
+			myUserDao.updateUserInfo(id, password2, name, birthDate);
+
+			response.sendRedirect("MyUserListServlet");
+
+			return;
+
+		}else if(!password1.equals(password2) || name.equals("") || birthDate.equals("")) {
+
+			request.setAttribute("errMsg", "Update Failed.");
+
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/updateUser.jsp");
+			dispatcher.forward(request, response);
+
+			return;
+
+		}
 
 		MyUserDao myUserDao = new MyUserDao();
-		myUserDao.updateUserInfo(id, password, name, birthDate, updateDate);
+		myUserDao.updateUserInfo(id, password1, name, birthDate);
 
 		response.sendRedirect("MyUserListServlet");
 

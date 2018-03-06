@@ -14,6 +14,12 @@
   </head>
   <body>
 
+  <c:if test="${errMsg != null}" >
+	    <div class="alert alert-danger" role="alert">
+		  ${errMsg}
+		</div>
+  </c:if>
+
   <div class="container">
 
  	<div class="header p-3 mb-2 bg-success text-black">
@@ -41,15 +47,17 @@
 
     <div class="form-group"><div align="center">
       <font size="+2">Password</font><span style="margin-right: 2em;"></span>:<span style="margin-right: 2em;"></span>
-      <input type="password" class="form w-25" id="InputPassword1" name="password" autofocus placeholder="Enter Password">
+      <input type="password" class="form w-25" name="password1" autofocus>
     </div></div>
 
     <br>
 
     <div class="form-group"><div align="center">
-      <font size="+2">Password(again)</font><span style="margin-right: 2em;"></span>:<span style="margin-right: 2em;"></span>
-      <input type="password" class="form w-25" id="InputPassword2" name="password2" placeholder="Enter the same Password">
+      <font size="+2">Password</font><span style="margin-right: 2em;"></span>:<span style="margin-right: 2em;"></span>
+      <input type="password" class="form w-25" name="password2">
     </div></div>
+
+     <input type="hidden"  name="password3" value="${user.password}">
 
     <br>
 
@@ -62,14 +70,11 @@
 
     <div class="form-group"><div align="center">
       <font size="+2">Birth Date</font><span style="margin-right: 2em;"></span>:<span style="margin-right: 2em;"></span>
-      <input type="datetime" class="form w-25" id="InputBD" name="birthDate" value="${user.birthDate}">
+      <input type="date" class="form w-25" id="InputBD" name="birthDate" value="${user.birthDate}">
     </div></div>
 
     <input type="hidden"  name="id" value="${user.id}">
-
-    <input type="hidden"  name="updateDate" value="<%= System.currentTimeMillis() %>">
-
-  <br><br>
+    <br><br>
 
     <div align="center"><button type="submit" class="btn btn-primary">Update</button></div>
 

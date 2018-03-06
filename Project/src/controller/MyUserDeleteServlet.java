@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,14 +16,14 @@ import model.MyUser;
 /**
  * Servlet implementation class MyUerDeleteServlet
  */
-@WebServlet("/MyUerDeleteServlet")
-public class MyUerDeleteServlet extends HttpServlet {
+@WebServlet("/MyUserDeleteServlet")
+public class MyUserDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyUerDeleteServlet() {
+    public MyUserDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -47,9 +48,13 @@ public class MyUerDeleteServlet extends HttpServlet {
 		System.out.println(id);
 
 		MyUserDao myUserDao = new MyUserDao();
-		myUserDao.deleteUserInfo(id);
+		MyUser myUser = myUserDao.findByLoginInfo(id);
 
-		response.sendRedirect("MyUserListServlet");
+		request.setAttribute("user", myUser);
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/deleteUser.jsp");
+		dispatcher.forward(request, response);
+
 
 	}
 
@@ -57,8 +62,16 @@ public class MyUerDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+
+		String id = request.getParameter("id");
+
+		System.out.println(id);
+
+		MyUserDao myUserDao = new MyUserDao();
+		myUserDao.deleteUserInfo(id);
+
+		response.sendRedirect("MyUserListServlet");
+
 	}
 
 }

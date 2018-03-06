@@ -21,7 +21,7 @@
 
 
     <div class="header text-info">
-      <div align="right">Hi! ユーザ名さん<span style="margin-right: 1em;"></span>
+      <div align="right">Hi! ${userInfo.name}<span style="margin-right: 1em;"></span>
       <a href="MyLogoutServlet" type="button" class="btn btn-secondary btn-sm">Logout</a>
       </div>
     </div>
@@ -31,10 +31,10 @@
   <br>
 
   <div align="center">
-      <font size="+2">Login ID<span style="margin-right: 0.5em;"></span>/<span style="margin-right: 0.5em;"></span>0001</font>
+      <font size="+2">Login ID<span style="margin-right: 0.5em;"></span>/<span style="margin-right: 0.5em;"></span>${user.loginId}</font>
   </div>
   <div align="center">
-      <font size="+2">User Name<span style="margin-right: 0.5em;"></span>/<span style="margin-right: 0.5em;"></span>a</font>
+      <font size="+2">User Name<span style="margin-right: 0.5em;"></span>/<span style="margin-right: 0.5em;"></span>${user.name}</font>
   </div>
 
   <br><br>
@@ -46,13 +46,19 @@
 
   <br><br>
 
-    <div align="center"><a href="userList.html" type="button" class="btn btn-outline-info">Cancel</a>
+    <form class="form" action="MyUserDeleteServlet" method="post">
+
+    <div align="center"><a href="MyUserListServlet" type="button" class="btn btn-outline-info">Cancel</a>
     <span style="margin-right: 6em;"></span>
-    <a href="#" type="submit" class="btn btn-primary">YES</a></div>
+
+    <input type="hidden" name="id" value="${user.id}">
+    <button type="submit" class="btn btn-primary">YES</button></div>
+
+    </form>
 
   <br><br>
 
-    <div align="right"><a href="userList.html" class="badge badge-light">Go Back</a></div>
+    <div align="right"><a href="MyUserListServlet" class="badge badge-light">Go Back</a></div>
 
   </div>
 

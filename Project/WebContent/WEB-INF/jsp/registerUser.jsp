@@ -1,5 +1,6 @@
 <%@page import="sun.security.util.Password"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!doctype html>
 <html lang="ja">
@@ -13,6 +14,12 @@
 
   </head>
   <body>
+
+  <c:if test="${errMsg != null}" >
+	    <div class="alert alert-danger" role="alert">
+		  ${errMsg}
+		</div>
+  </c:if>
 
   <div class="container">
 
@@ -35,21 +42,21 @@
 
     <div class="form-group"><div align="center">
       <font size="+2">Login ID</font><span style="margin-right: 2em;"></span>:<span style="margin-right: 2em;"></span>
-      <input type="text" class="form w-25" name="id" id="Id" autofocus placeholder="Enter Login ID ">
+      <input type="text" class="form w-25" name="loginId" id="Id" autofocus placeholder="Enter Login ID ">
     </div></div>
 
     <br>
 
     <div class="form-group"><div align="center">
       <font size="+2">Password</font><span style="margin-right: 2em;"></span>:<span style="margin-right: 2em;"></span>
-      <input type="password" class="form w-25" name="password1" id="Password1" placeholder="Enter Password">
+      <input type="password" class="form w-25" name="password1" value="${user.password}">
     </div></div>
 
     <br>
 
     <div class="form-group"><div align="center">
-      <font size="+2">Password(again)</font><span style="margin-right: 2em;"></span>:<span style="margin-right: 2em;"></span>
-      <input type="password" class="form w-25" name="password2" id="Password2" placeholder="Enter the same Password">
+      <font size="+2">Password</font><span style="margin-right: 2em;"></span>:<span style="margin-right: 2em;"></span>
+      <input type="password" class="form w-25" name="password2" value="${user.password}">
     </div></div>
 
     <br>
@@ -63,11 +70,8 @@
 
     <div class="form-group"><div align="center">
       <font size="+2">Birth Date</font><span style="margin-right: 2em;"></span>:<span style="margin-right: 2em;"></span>
-      <input type="text" class="form w-25" name="birthDate" id="BirthDate" placeholder="Enter Birth Date (sample: 2000-01-01)">
+      <input type="date" class="form w-25" name="birthDate" id="BirthDate" placeholder="Enter Birth Date (sample: 2000-01-01)">
     </div></div>
-
-    <input type="hidden"  name="createDate" value="<%= System.currentTimeMillis() %>">
-    <input type="hidden"  name="updateDate" value="<%= System.currentTimeMillis() %>">
 
   <br><br>
 
