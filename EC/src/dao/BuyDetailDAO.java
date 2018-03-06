@@ -130,4 +130,54 @@ public class BuyDetailDAO {
 		}
 	}
 
+//	以下追加するメソッド
+	 /**
+    * userIDによる購入履歴情報検索
+    * @param buyId
+    * @return buyDetailItemList ArrayList<ItemDataBeans>
+    *             購入履歴情報のデータを持つJavaBeansのリスト
+    * @throws SQLException
+    */
+	public static ArrayList<ItemDataBeans> getItemDataBeansListByuserId(int userId) throws SQLException {
+		Connection con = null;
+		PreparedStatement st = null;
+		try {
+			con = DBManager.getConnection();
+
+			st = con.prepareStatement(
+					"SELECT * FROM t_buy"
+					+ " JOIN t_buy_detail"
+					+ " ON t_buy.id = t_buy_detail.buy_id"
+					+ " JOIN m_item"
+					+ " ON t_buy_detail.item_id = m_item.id"
+					+ " JOIN m_delivery_method"
+					+ " ON t_buy.delivery_method_id = m_delivery_method.id"
+					+ " WHERE t_buy.user_id = ?");
+			st.setInt(1, userId);
+
+			ResultSet rs = st.executeQuery();
+			ArrayList<ItemDataBeans> buyDetailItemList = new ArrayList<ItemDataBeans>();
+
+			while (rs.next()) {
+				ItemDataBeans idb = new ItemDataBeans();
+				idb.setId(rs.getInt("id"));
+				idb.setName(rs.getString("name"));
+				idb.setPrice(rs.getInt("price"));
+
+
+				buyDetailItemList.add(idb);
+			}
+
+			System.out.println("searching ItemDataBeansList by BuyID has been completed");
+			return buyDetailItemList;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+	}
+
 }

@@ -57,7 +57,7 @@
 														<%
 															for (DeliveryMethodDataBeans dmdb : dmdbList) {
 														%>
-														<option value="<%=dmdb.getId()%>"><%=dmdb.getName()%></option>
+														<option value="<%=dmdb.getId()%>"><%=dmdb.getName()%>&nbsp;<%=dmdb.getPrice()%>円</option>
 														<%
 															}
 														%>
