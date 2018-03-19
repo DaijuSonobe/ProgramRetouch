@@ -1,6 +1,7 @@
 package ec;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import beans.BuyDataBeans;
 import beans.UserDataBeans;
+import dao.BuyDetailDAO;
 import dao.UserDAO;
 
 /**
@@ -40,6 +43,9 @@ public class UserData extends HttpServlet {
 
 			request.setAttribute("validationMessage", validationMessage);
 			request.setAttribute("udb", udb);
+
+			ArrayList<BuyDataBeans> itemList = BuyDetailDAO.getItemDataBeansListByUserId(userId);
+			request.setAttribute("itemList", itemList);
 
 			request.getRequestDispatcher(EcHelper.USER_DATA_PAGE).forward(request, response);
 

@@ -5,10 +5,17 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class BuyDataBeans  implements Serializable {
+
+//	buyIdとitemNmとpriceとdetailを追加
+
 	private int id;
 	private int userId;
+	private int buyId;
+	private String itemNm;
+	private int price;
+	private String detail;
 	private int totalPrice;
-	private int delivertMethodId;
+	private int deliveryMethodId;
 	private Date buyDate;
 
 	private String deliveryMethodName;
@@ -27,6 +34,30 @@ public class BuyDataBeans  implements Serializable {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
+	public int getBuyId() {
+		return buyId;
+	}
+	public void setBuyId(int buyId) {
+		this.buyId = buyId;
+	}
+	public String getItemNm() {
+		return itemNm;
+	}
+	public void setItemNm(String itemNm) {
+		this.itemNm = itemNm;
+	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
+	public String getDetail() {
+		return detail;
+	}
+	public void setDetail(String detail) {
+		this.detail = detail;
+	}
 	public int getTotalPrice() {
 		return totalPrice;
 	}
@@ -35,11 +66,11 @@ public class BuyDataBeans  implements Serializable {
 	}
 
 
-	public int getDelivertMethodId() {
-		return delivertMethodId;
+	public int getDeliveryMethodId() {
+		return deliveryMethodId;
 	}
-	public void setDelivertMethodId(int delivertMethodId) {
-		this.delivertMethodId = delivertMethodId;
+	public void setDeliveryMethodId(int deliveryMethodId) {
+		this.deliveryMethodId = deliveryMethodId;
 	}
 	public Date getBuyDate() {
 		return buyDate;
