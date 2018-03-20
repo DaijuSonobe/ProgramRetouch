@@ -145,27 +145,20 @@ public class BuyDetailDAO {
 		try {
 			con = DBManager.getConnection();
 
-//			st = con.prepareStatement(
-//					"SELECT buy_id, create_date, total_price, m_delivery_method.name FROM t_buy"
-//					+ " JOIN t_buy_detail"
-//					+ " ON t_buy.id = t_buy_detail.buy_id"
-//					+ " JOIN m_item"
-//					+ " ON t_buy_detail.item_id = m_item.id"
-//					+ " JOIN m_delivery_method"
-//					+ " ON t_buy.delivery_method_id = m_delivery_method.id"
-//					+ " WHERE t_buy.user_id = ?");
-//			st.setInt(1, userId);
+			st = con.prepareStatement(
+					"SELECT t_buy.id, t_buy.create_date, t_buy.total_price, m_delivery_method.name FROM t_buy"
+					+ " JOIN m_delivery_method"
+					+ " ON t_buy.delivery_method_id = m_delivery_method.id"
+					+ " WHERE t_buy.user_id = ?");
+			st.setInt(1, userId);
 
 			ResultSet rs = st.executeQuery();
 			ArrayList<BuyDataBeans> buyDetailItemList = new ArrayList<>();
 
 			while (rs.next()) {
 				BuyDataBeans bdb = new BuyDataBeans();
-				bdb.setBuyId(rs.getInt("buy_id"));
-				bdb.setItemNm(rs.getString("m_item.name"));
-				bdb.setPrice(rs.getInt("price"));
+				bdb.setBuyId(rs.getInt("t_buy.id"));
 				bdb.setTotalPrice(rs.getInt("total_price"));
-				bdb.setDetail(rs.getString("detail"));
 				bdb.setDeliveryMethodName(rs.getString("m_delivery_method.name"));
 				bdb.setBuyDate(rs.getDate("create_date"));
 
